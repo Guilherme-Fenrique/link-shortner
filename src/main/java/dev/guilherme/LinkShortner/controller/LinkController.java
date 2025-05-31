@@ -18,6 +18,7 @@ public class LinkController {
         this.linkService = linkService;
     }
 
+
     @PostMapping
     public ResponseEntity<LinkResponseDto> createLink(@RequestBody LinkDto linkDto) {
         LinkResponseDto responseDto = linkService.createLink(linkDto);
@@ -30,7 +31,7 @@ public class LinkController {
         if (linkResponseDto == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.status(HttpStatus.FOUND)
+        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY)
                 .location(URI.create(linkResponseDto.getLongUrl()))
                 .build();
     }
